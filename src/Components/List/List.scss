@@ -1,0 +1,111 @@
+.List {
+
+    // width: calc(100% - 82px - 249px);
+    width: calc(100% - 240px);
+    height: 100%;
+    box-sizing: border-box;
+    border: 1px solid blue;
+
+    &__Top {
+        height: 7.5%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        // border: 1px solid green ;
+        padding: 0px 13px;
+        font-size: 14px;
+        font-weight: 500;
+        
+
+        &__Left {
+            display: flex;
+            flex-direction: row;
+            column-gap: 20px;
+            color: #97a0af;
+        }
+
+        &__Right {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            column-gap: 20px;
+
+            &__Textbox {
+                width: 100px;
+                box-sizing: border-box;
+                border: 1px solid rgb(228, 228, 228);
+                height: 30px;
+                background-color: white;
+                width: 210px;
+                height: 35px;
+                border-radius: 5px;
+                
+            }
+
+            &__Button {
+                height: 40px;
+                width: 100px;
+                box-sizing: border-box;
+                border: 0px;
+                background-color: #d38123;
+                color: white;
+                border-radius: 5px;
+                font-size: 17px;
+            }
+        }
+    }
+
+    &__Item {
+        width: 97%;
+        // height: 92.5%;
+        height: 60%;
+        margin: 0 auto;
+        box-sizing: border-box;
+        border: 1px solid red;
+        background-color: white;
+        
+        border-radius: 15px;
+
+        &__Title {
+            display: grid;
+            flex-direction: row;
+            grid-template-columns: 50% 25% 25%;
+            width: 97%;
+            margin: 0 auto;
+            font-size: 15px;
+            // justify-content: space-between;
+        }
+
+        &__Dashboard {
+            width: 95%;
+            height: calc(100% - 70px);
+            border-radius: 5px;
+            margin: 0 auto;
+            box-sizing: border-box;
+            border: 1px solid black;
+
+            &__Article {
+                height: 65px;
+                display: grid;
+                flex-direction: row;
+                grid-template-columns: 50% 26% 24%;
+                padding-left: 10px;
+                align-items: center;
+
+
+            }
+
+            &__Articles {
+                height: 65px;
+                display: grid;
+                flex-direction: row;
+                grid-template-columns: 50% 26% 24%;
+                padding-left: 10px;
+                align-items: center;
+                background-color: #f4f5f7;
+            }
+        }
+    }
+    
+}

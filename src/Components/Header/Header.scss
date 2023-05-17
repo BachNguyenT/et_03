@@ -1,0 +1,53 @@
+.Header {
+
+    // width: calc(100vw - 82px);
+    width: 100%;
+    height: 73px;
+    display: flex;
+    padding: 10px 30px;
+    
+
+    font-family: NewYork;
+    font-size: 24px;
+    font-weight: 600;
+
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+
+    color: white;
+
+    background-color: rgb(30, 68, 104);
+
+    &__Title {
+        font-size: 21px;
+    }   
+
+
+    &__Content {
+        width: 6.5%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        font-family: verdana;
+        font-size: 13px;
+        font-weight: 200;
+        line-height: 5px;
+
+        &__Circle {
+                border: 1px solid rgba(0,0,0,0.25);
+                width: 10px;
+                height: 18px;
+                border-radius: 1000px;
+                background-color: rgba(0,0,0,0.25);
+                padding: 12px 8px 0px 10px;
+                
+
+        }
+
+        &__ID {
+            opacity: .5;
+        }
+    }
+}
