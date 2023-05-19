@@ -1,33 +1,43 @@
 .Sidebar {
-    width: 82px;
-    height: 100%;
-    box-sizing: border-box;
-    border: 1px solid pink;
+  width: 80px;
+  height: 100vh;
+  box-sizing: border-box;
+  border: 5px solid pink;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px 0px;
+
+  &__Upper {
     display: flex;
+    width: 80%;
     flex-direction: column;
-    justify-content: space-between;
-    position: absolute;
-    top: 0px;
+    row-gap: 10px;
+    background-color: yellow;
+    margin: 0 auto;
     
-    &__Upper {
-        display: flex;
-        flex-direction: column;
 
-        &__Button {
-            width: 60%;
-            height: 55px;
-            margin: 5px auto;
-        }
+    &__Button {
+      // margin: 5px auto;
+      width: 100%;
+      height: 50px;
+      // border: none;
+      // outline: none;
+      // background-color: red;
+      // align-items: center;
+      // display: flex;
+      // align-content: center;
     }
+  }
 
-    &__Lower {
-        width: 100%;
-        // border: 1px solid red;
-        margin: 5px auto;
-        
-        &__Button {
-            width: 60%;
-            margin: 5px auto;
-        }
+  &__Lower {
+    width: 80%;
+    // border: 1px solid red;
+    margin: 5px auto;
+
+    &__Button {
+      width: 60%;
+      margin: 5px auto;
     }
+  }
 }
