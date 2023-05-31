@@ -1,9 +1,18 @@
 .List {
   // width: calc(100% - 82px - 249px);
   width: 100%;
+  max-height: calc(100vh - 70px);
   height: auto;
   box-sizing: border-box;
-  // border: 1px solid blue;
+  // background-color: red;
+
+  &__Bottom {
+    height: 92.5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    // border: 1px solid blue;
+  }
 
   &__Top {
     height: 7.5%;
@@ -15,6 +24,7 @@
     padding: 0px 13px;
     font-size: 14px;
     font-weight: 500;
+    // margin: 10px 0;
 
     &__Left {
       display: flex;
@@ -55,8 +65,9 @@
 
   &__Item {
     width: 97%;
-    // height: 92.5%;
-    height: 60%;
+    height: auto;
+    max-height: 750px;
+    overflow: auto;
     margin: 0 auto;
     box-sizing: border-box;
     // border: 1px solid red;
@@ -75,13 +86,15 @@
     }
 
     &__Dashboard {
-      width: 95%;
-      height: calc(100% - 70px);
+      width: 97%;
+      // height: calc(100% - 70px);
+      height: 90%;
       border-radius: 5px;
       margin: 0 auto;
       box-sizing: border-box;
       // border: 1px solid black;
-      overflow: auto;
+      padding-bottom: 10px;
+      // overflow: auto;
 
       &__Article {
         height: 65px;
@@ -116,6 +129,46 @@
             color: red;
           }
         }
+      }
+    }
+  }
+
+  &__Footer {
+    margin: 10px auto;
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+
+    &__Navigator {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      column-gap: 5px;
+
+      
+      &__Arrows {
+        background: transparent;
+        box-sizing: border-box;
+
+
+        background: transparent;
+        display: flex;
+        flex-direction: row;
+      }
+
+      &__Nums {
+        display: flex;
+        flex-direction: row;
+        background: transparent;
+      }
+
+      &__Button {
+        background: transparent;
+        
+        border: transparent;
       }
     }
   }
