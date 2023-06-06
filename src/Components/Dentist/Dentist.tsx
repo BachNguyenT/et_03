@@ -1,3 +1,4 @@
+import React from "react";
 import "./Dentist.scss";
 import { Switch } from "antd";
 
@@ -11,7 +12,7 @@ const Dentist = () => {
           <p>Không công bố (0)</p>
         </div>
         <div className="Dentist__Top__Right">
-          <button
+          <input
             className="Dentist__Top__Right__Textbox"
             type="text"
             placeholder="Nhập thông tin tìm kiếm"

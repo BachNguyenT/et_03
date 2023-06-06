@@ -13,13 +13,14 @@ import {
   Modal,
 } from "antd";
 import axios from "axios";
+import React from "react";
 import { useState } from "react";
 
 const currentDate = new Date();
 
 const { TextArea } = Input;
 
-const getBase64 = (file) =>
+const getBase64 = (file: any) =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -30,7 +31,8 @@ const getBase64 = (file) =>
 let publicDate = currentDate.getTime,
   notCurrentTime = false;
 
-const Page = ({ postId, setPostId, post, setPost }) => {
+const Page = ({ post, setPost }: any) => {
+  const [postId, setPostId] = useState(post._id);
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
@@ -48,7 +50,7 @@ const Page = ({ postId, setPostId, post, setPost }) => {
   );
 
   const accessToken =
-    "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDMwMWU4ZDE0ZmFkMDA5NGExOGI0OWQiLCJ1c2VySWQiOiI2NDMwMWU4ZDE0ZmFkMDA5NGExOGI0OWQiLCJpYXQiOjE2ODQ4MzUyOTcsImV4cCI6MTY4NTQ0MDA5N30.mYC1KAJ3eQuvBUrf5uTGupcCu1gqF7i9YAACB0vco2U";
+    "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDMwMWU4ZDE0ZmFkMDA5NGExOGI0OWQiLCJ1c2VySWQiOiI2NDMwMWU4ZDE0ZmFkMDA5NGExOGI0OWQiLCJpYXQiOjE2ODU2MTY2NDYsImV4cCI6MTY4NjIyMTQ0Nn0.ZkEPuWR6Lq3HfJerLbthQOJmW1HvPo5oepbmBBz07PI";
 
   const fetchArticle = () => {
     axios
@@ -93,7 +95,7 @@ const Page = ({ postId, setPostId, post, setPost }) => {
 
   const handleCancel = () => setPreviewOpen(false);
 
-  const handleChange = (file) => {
+  const handleChange = (file: any) => {
     setPostImage(file);
     console.log(postImage);
     file.file.status = "done";
@@ -164,8 +166,8 @@ const Page = ({ postId, setPostId, post, setPost }) => {
                 value={category}
                 onChange={(e) => {
                   if (
-                    e.target.value.toUpperCase() == "BLOG" ||
-                    e.target.value.toUpperCase() == "EVENT"
+                    e.target.value.toUpperCase() === "BLOG" ||
+                    e.target.value.toUpperCase() === "EVENT"
                   ) {
                     setCategory(e.target.value.toUpperCase());
                   }
@@ -322,7 +324,7 @@ const Page = ({ postId, setPostId, post, setPost }) => {
         </div>
       </div>
       <div className="Page__Footer">
-        <Button className="Footer__Button" onClick={() => setPostId(0)}>
+        <Button className="Footer__Button" onClick={() => {setPost()}}>
           Huỷ
         </Button>
         <Button
@@ -330,7 +332,7 @@ const Page = ({ postId, setPostId, post, setPost }) => {
           onClick={() => {
             submit();
             fetchArticle();
-            setPostId(0);
+            setPost();
             console.log(postId);
           }}
         >

@@ -2,9 +2,12 @@ import "./List.scss";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Switch } from "antd";
+import React from "react";
+import Post from "../../Model/postList";
 
-const List = ({ postId, setPostId, post, setPost }) => {
-  const [articles, setArticles] = useState([]);
+const List = ({ post, setPost }: any) => {
+  const [postId, setPostId] = useState(0);
+  const [articles, setArticles] = useState<Post[]>([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   let effectCalled = false;
@@ -12,9 +15,11 @@ const List = ({ postId, setPostId, post, setPost }) => {
   const [show, setShow] = useState();
   const [noShow, setNoShow] = useState();
   const totalPage = 2;
+  const token = localStorage.getItem("accessToken");
   const accessToken =
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDMwMWU4ZDE0ZmFkMDA5NGExOGI0OWQiLCJ1c2VySWQiOiI2NDMwMWU4ZDE0ZmFkMDA5NGExOGI0OWQiLCJpYXQiOjE2ODUwMDQ5MzgsImV4cCI6MTY4NTYwOTczOH0.TKKcw_4dTDFnjJ3o3FkQ8sJ6-1fqwpwGxoKVy-CGM6A";
+    `Bearer ${token}`;
 
+  console.log(accessToken);
   const getPost = () => {
     axios
       .get("https://api-saomy.wisere.com/api/v1/posts/count-total-post", {
@@ -61,7 +66,7 @@ const List = ({ postId, setPostId, post, setPost }) => {
   // const createPost = () => {
   //   axios.post("https://api-saomy.wisere.com/api/v1/posts/create-post"), {
   //     title:
-  //     category: 
+  //     category:
   //     isShow:
   //     postImage:
   //     content:
@@ -84,7 +89,7 @@ const List = ({ postId, setPostId, post, setPost }) => {
   }, [page]);
 
   const NumberButtons = () => {
-    const buttons = [];
+    const buttons: React.JSX.Element[] = [];
 
     if (totalPage <= 4) {
       for (let i = 1; i <= totalPage; i++) {
@@ -106,7 +111,7 @@ const List = ({ postId, setPostId, post, setPost }) => {
           <Button
             className="List__Footer__Navigator__Nums__Button"
             onClick={() => {
-              setPage(i).then(() => fetchPosts());
+              setPage(i)
             }}
           >
             {i}
@@ -164,7 +169,7 @@ const List = ({ postId, setPostId, post, setPost }) => {
           <p>Không công bố ({noShow})</p>
         </div>
         <div className="List__Top__Right">
-          <button
+          <input
             className="List__Top__Right__Textbox"
             type="text"
             placeholder="Nhập thông tin tìm kiếm"
@@ -191,7 +196,6 @@ const List = ({ postId, setPostId, post, setPost }) => {
                       : { backgroundColor: "white" }
                   }
                   onClick={() => {
-                    setPostId(article._id);
                     setPost(article);
                     console.log(post);
                   }}
@@ -231,8 +235,9 @@ const List = ({ postId, setPostId, post, setPost }) => {
             >
               {"<"}
             </Button>
-
-            <NumberButtons className="List__Footer__Navigator__Nums" />
+            <div className="List__Footer__Navigator__Nums">
+              {NumberButtons()}
+            </div>
 
             <Button
               className="List__Footer__Navigator__Arrows"
