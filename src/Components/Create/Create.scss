@@ -1,0 +1,114 @@
+.NewArticle {
+    padding-left: 25px;
+    background-color: white;
+    border: 1px solid rgb(242, 242, 242);
+  
+    height: calc(100vh - 73px);
+    width: calc(100vw - 110px);
+  
+    &__Top {
+      overflow: auto;
+      height: calc(100% - 80px);
+  
+      &__Head {
+        font-family: NewYork;
+        font-size: 22px;
+      }
+  
+      //   background-color: red;
+  
+      &__Title {
+        &__Forms {
+          display: flex;
+          flex-direction: row;
+          //   background-color: pink;
+          width: calc(100% - 25px);
+          font-size: 14px;
+          color: rgba(0, 0, 0, 0.88);
+          font-weight: 700;
+  
+          &__Item {
+            width: calc(100vw / 2);
+          }
+        }
+      }
+  
+      &__Status {
+        display: flex;
+        flex-direction: row;
+  
+        &__Left {
+          display: flex;
+          flex-direction: column;
+          width: calc(50% - 13px);
+  
+          &__Upper {
+            // background-color: green;
+            margin: 0px;
+            font-size: 23px;
+          }
+  
+          &__Lower {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            column-gap: 10px;
+            // background-color: gray;
+          }
+  
+          &__Check {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            column-gap: 10px;
+          }
+  
+          &__Pick {
+            display: flex;
+            flex-direction: row;
+            column-gap: 10px;
+            // background-color: red;
+            &__Picker {
+              width: 100%;
+            }
+          }
+        }
+  
+        &__Right {
+          width: calc(50% - 13px);
+          display: flex;
+          flex-direction: column;
+          //   background-color: turquoise;
+        }
+      }
+  
+      &__SEOTitle {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-right: 20px;
+  
+        &__Right {
+          display: flex;
+          flex-direction: row;
+          // background-color: yellow;
+          align-items: center;
+          column-gap: 15px;
+        }
+      }
+    }
+  
+    &__Footer {
+      height: 80px;
+      display: flex;
+      flex-direction: row;
+      background-color: white;
+      justify-content: right;
+      align-items: center;
+      padding-right: 20px;
+      &__Button {
+          
+      }
+    }
+  }
+  

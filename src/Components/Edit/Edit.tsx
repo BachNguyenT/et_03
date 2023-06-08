@@ -1,4 +1,4 @@
-import "./Page.scss";
+import "./Edit.scss";
 import { PlusOutlined, LoadingOutlined } from "@ant-design/icons";
 import {
   Button,
@@ -11,10 +11,13 @@ import {
   Upload,
   message,
   Modal,
+  Select,
+  Space,
 } from "antd";
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const currentDate = new Date();
 
@@ -31,7 +34,7 @@ const getBase64 = (file: any) =>
 let publicDate = currentDate.getTime,
   notCurrentTime = false;
 
-const Page = ({ post, setPost }: any) => {
+const Edit = ({ post, setPost }: any) => {
   const [postId, setPostId] = useState(post._id);
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
@@ -40,6 +43,7 @@ const Page = ({ post, setPost }: any) => {
 
   const [title, setTitle] = useState(post.title);
   const [category, setCategory] = useState(post.category);
+  console.log(category);
   const [isShow, setIsShow] = useState(post.isShow);
   const [content, setContent] = useState(post.content);
   const [postImage, setPostImage] = useState(post.postImage);
@@ -49,9 +53,15 @@ const Page = ({ post, setPost }: any) => {
     post.descriptionSeoPage
   );
 
-  const accessToken =
-    "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDMwMWU4ZDE0ZmFkMDA5NGExOGI0OWQiLCJ1c2VySWQiOiI2NDMwMWU4ZDE0ZmFkMDA5NGExOGI0OWQiLCJpYXQiOjE2ODU2MTY2NDYsImV4cCI6MTY4NjIyMTQ0Nn0.ZkEPuWR6Lq3HfJerLbthQOJmW1HvPo5oepbmBBz07PI";
+  const token = localStorage.getItem("accessToken");
+  const accessToken = `Bearer ${token}`;
 
+  const handleSelect = (value: string) => {
+    console.log(`selected ${value}`);
+    setCategory("EVENT");
+  };
+
+  const navigate = useNavigate();
   const fetchArticle = () => {
     axios
       .post(
@@ -101,7 +111,6 @@ const Page = ({ post, setPost }: any) => {
     file.file.status = "done";
   };
 
-
   const uploadButton = (
     <div>
       <PlusOutlined />
@@ -116,12 +125,12 @@ const Page = ({ post, setPost }: any) => {
   );
 
   return (
-    <div className="Page">
-      <div className="Page__Top">
-        <h3 className="Page__Top__Head">Chỉnh sửa bài viết</h3>
-        <div className="Page__Top__Title">
+    <div className="Edit">
+      <div className="Edit__Top">
+        <h3 className="Edit__Top__Head">Chỉnh sửa bài viết</h3>
+        <div className="Edit__Top__Title">
           <Form
-            className="Page__Top__Title__Forms"
+            className="Edit__Top__Title__Forms"
             layout="vertical"
             labelCol={{
               span: 8,
@@ -134,7 +143,7 @@ const Page = ({ post, setPost }: any) => {
             }}
           >
             <Form.Item
-              className="Page__Top__Title__Forms__Item"
+              className="Edit__Top__Title__Forms__Item"
               label="Tiêu đề"
               rules={[
                 {
@@ -153,7 +162,7 @@ const Page = ({ post, setPost }: any) => {
             </Form.Item>
 
             <Form.Item
-              className="Page__Top__Title__Forms__Item"
+              className="Edit__Top__Title__Forms__Item"
               label="Danh mục"
               rules={[
                 {
@@ -162,7 +171,7 @@ const Page = ({ post, setPost }: any) => {
                 },
               ]}
             >
-              <Input
+              {/* <Input
                 value={category}
                 onChange={(e) => {
                   if (
@@ -173,14 +182,25 @@ const Page = ({ post, setPost }: any) => {
                   }
                   console.log(category);
                 }}
-              />
+              /> */}
+              <Space wrap>
+                <Select
+                  defaultValue="BLOG"
+                  style={{ width: 120 }}
+                  onChange={handleSelect}
+                  options={[
+                    { value: "BLOG", label: "BLOG" },
+                    { value: "EVENT", label: "EVENT" },
+                  ]}
+                />
+              </Space>
             </Form.Item>
           </Form>
         </div>
-        <div className="Page__Top__Status">
-          <div className="Page__Top__Status__Left">
-            <h6 className="Page__Top__Status__Left__Upper">Trạng thái</h6>
-            <div className="Page__Top__Status__Left__Lower">
+        <div className="Edit__Top__Status">
+          <div className="Edit__Top__Status__Left">
+            <h6 className="Edit__Top__Status__Left__Upper">Trạng thái</h6>
+            <div className="Edit__Top__Status__Left__Lower">
               <Switch
                 defaultChecked
                 onChange={(e) => {
@@ -191,25 +211,22 @@ const Page = ({ post, setPost }: any) => {
               />
               <p>Hiển thị</p>
             </div>
-            <div className="Page__Top__Status__Left__Check">
+            <div className="Edit__Top__Status__Left__Check">
               <input type="checkbox" />
               <p>Thiết lập ngày đăng tự động</p>
             </div>
-            <div className="Page__Top__Status__Left__Pick">
+            <div className="Edit__Top__Status__Left__Pick">
               <Form.Item>
-                <DatePicker className="Page__Top__Status__Left__Pick__Picker" />
+                <DatePicker className="Edit__Top__Status__Left__Pick__Picker" />
               </Form.Item>
               <Form.Item>
-                <TimePicker className="Page__Top__Status__Left__Pick__Picker" />
+                <TimePicker className="Edit__Top__Status__Left__Pick__Picker" />
               </Form.Item>
             </div>
           </div>
-          <div className="Page__Top__Status__Right">
+          <div className="Edit__Top__Status__Right">
             <p>Ảnh đại diện bài viết</p>
-            <Upload
-              listType="picture-card"
-              onChange={handleChange}
-            >
+            <Upload listType="picture-card" onChange={handleChange}>
               {fileList.length > 1 ? null : uploadButton}
             </Upload>
             <Modal
@@ -229,7 +246,7 @@ const Page = ({ post, setPost }: any) => {
           </div>
         </div>
 
-        <div className="Page__Top__Content">
+        <div className="Edit__Top__Content">
           <h6>Nội dung bài viết</h6>
           <TextArea
             value={content}
@@ -238,11 +255,12 @@ const Page = ({ post, setPost }: any) => {
               setContent(e.target.value);
               console.log(content);
             }}
+            
           />
         </div>
-        <div className="Page__Top__SEOTitle">
+        <div className="Edit__Top__SEOTitle">
           <h3>SEO</h3>
-          <div className="Page__Top__SEOTitle__Right">
+          <div className="Edit__Top__SEOTitle__Right">
             <p>Chỉnh sửa SEO</p>
             <Switch
               onChange={(e) => {
@@ -254,9 +272,9 @@ const Page = ({ post, setPost }: any) => {
           </div>
         </div>
 
-        <div className="Page__Top__SEO">
+        <div className="Edit__Top__SEO">
           <Form
-            className="Page__Top__SEO__Form"
+            className="Edit__Top__SEO__Form"
             layout="vertical"
             labelCol={{
               span: 8,
@@ -269,7 +287,7 @@ const Page = ({ post, setPost }: any) => {
             }}
           >
             <Form.Item
-              className="Page__Top__Title__Forms__Item"
+              className="Edit__Top__Title__Forms__Item"
               label="Tiêu đề trang"
               rules={[
                 {
@@ -288,7 +306,7 @@ const Page = ({ post, setPost }: any) => {
             </Form.Item>
 
             <Form.Item
-              className="Page__Top__Title__Forms__Item"
+              className="Edit__Top__Title__Forms__Item"
               label="Mô tả"
               rules={[
                 {
@@ -309,7 +327,7 @@ const Page = ({ post, setPost }: any) => {
             </Form.Item>
 
             <Form.Item
-              className="Page__Top__Title__Forms__Item"
+              className="Edit__Top__Title__Forms__Item"
               label="Đường dẫn"
               rules={[
                 {
@@ -323,8 +341,14 @@ const Page = ({ post, setPost }: any) => {
           </Form>
         </div>
       </div>
-      <div className="Page__Footer">
-        <Button className="Footer__Button" onClick={() => {setPost()}}>
+      <div className="Edit__Footer">
+        <Button
+          className="Footer__Button"
+          onClick={() => {
+            setPost();
+            navigate("/dashboard");
+          }}
+        >
           Huỷ
         </Button>
         <Button
@@ -333,7 +357,7 @@ const Page = ({ post, setPost }: any) => {
             submit();
             fetchArticle();
             setPost();
-            console.log(postId);
+            navigate("/dashboard");
           }}
         >
           Lưu
@@ -343,4 +367,4 @@ const Page = ({ post, setPost }: any) => {
   );
 };
 
-export default Page;
+export default Edit;
