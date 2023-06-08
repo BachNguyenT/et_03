@@ -46,9 +46,9 @@ const NewArticle = () => {
   const [titleSeoPage, setTitleSeoPage] = useState("");
   const [descriptionSeoPage, setDescriptionSeoPage] = useState("");
 
-  const accessToken =
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDMwMWU4ZDE0ZmFkMDA5NGExOGI0OWQiLCJ1c2VySWQiOiI2NDMwMWU4ZDE0ZmFkMDA5NGExOGI0OWQiLCJpYXQiOjE2ODU2MTY2NDYsImV4cCI6MTY4NjIyMTQ0Nn0.ZkEPuWR6Lq3HfJerLbthQOJmW1HvPo5oepbmBBz07PI";
-
+  const token = localStorage.getItem("accessToken");
+  const accessToken = `Bearer ${token}`;
+  
   const navigate = useNavigate();
 
   const createArticle = () => {
