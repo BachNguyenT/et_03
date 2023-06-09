@@ -56,9 +56,7 @@ const Posts = ({ post, setPost, category }: any) => {
         category: category,
       })
       .then((response) => {
-        console.log(response.data.docs);
         setArticles(response.data.docs);
-        console.log(page);
         setLoading(false);
       })
       .catch((error) => {
@@ -259,7 +257,6 @@ const Posts = ({ post, setPost, category }: any) => {
                       <Switch
                         defaultChecked
                         onChange={() => {
-                          console.log("changed");
                         }}
                         style={{ width: "10px" }}
                         className="Posts__Item__Dashboard__Articles__Show__Switch"

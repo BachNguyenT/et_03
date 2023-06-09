@@ -5,7 +5,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const Searchbar = () => {
     let path = useLocation().pathname;
-    console.log(path);
     let navigate = useNavigate();
   return (
     <div className="Searchbar">

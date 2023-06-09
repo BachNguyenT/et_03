@@ -6,7 +6,8 @@ import Searchbar from "./Components/Searchbar/Searchbar";
 import Posts from "./Components/Posts/Posts";
 import Edit from "./Components/Edit/Edit";
 import NewArticle from "./Components/Create/Create";
-import { useState } from "react";
+import ProtectedRoutes from "./ProtectedRoutes";
+import { useEffect, useState } from "react";
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -14,6 +15,7 @@ import {
   Route,
   useNavigate,
   useLocation,
+  Navigate,
 } from "react-router-dom";
 
 const App: React.FC = () => {
@@ -22,15 +24,12 @@ const App: React.FC = () => {
 
   const keyExists = localStorage.accessToken == null;
 
-  // const navigate = useNavigate();
-
-  // while (keyExists) {
-  //   navigate("/users/signin");
-  // }
-
   const Content = () => {
     let path = useLocation().pathname;
-    console.log(path);
+    // const navigate = useNavigate();
+    // while (keyExists) {
+    //   navigate("/users/signin");
+    // }
     return (
       <Routes>
         <Route
@@ -38,8 +37,14 @@ const App: React.FC = () => {
           element=<div className="App__Content__Posts">
             <Searchbar />
             <Routes>
-              <Route path="/" element=<Posts post={post} setPost={setPost} category="BLOG" />/>
-              <Route path="/events" element=<Posts post={post} setPost={setPost} category="EVENT" />/>
+              <Route
+                path="/"
+                element=<Posts post={post} setPost={setPost} category="BLOG" />
+              />
+              <Route
+                path="/events"
+                element=<Posts post={post} setPost={setPost} category="EVENT" />
+              />
             </Routes>
           </div>
         />
@@ -51,45 +56,45 @@ const App: React.FC = () => {
     );
   };
 
+  const Dashboard = () => {
+    return (
+      <div className="App__container">
+        <Sidebar />
+        <div className="App__Content">
+          <Header />
+          {!post ? (
+            <div className="App__Content__Posts">
+              <Searchbar />
+              <Posts post={post} setPost={setPost} />
+            </div>
+          ) : (
+            <Edit post={post} setPost={setPost} />
+          )}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="App">
       <Router>
         <Routes>
-          <Route
-            path="/"
-            element={
-              keyExists ? (
-                <Login />
-              ) : (
-                <div className="App__container">
-                  <Sidebar />
-                  <div className="App__Content">
-                    <Header />
-                    {!post ? (
-                      <div className="App__Content__Posts">
-                        <Searchbar />
-                        <Posts post={post} setPost={setPost} />
-                      </div>
-                    ) : (
-                      <Edit post={post} setPost={setPost} />
-                    )}
-                  </div>
+          {/* <Route path="/" element={keyExists ? <Login /> : <Dashboard />} /> */}
+          <Route path="/" element={<Navigate to="/users/signin" />} />
+          <Route path="/users/signin" element={<Login />} />
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/users/signin" element={<Login />} />
+            <Route
+              path="/dashboard/*"
+              element=<div className="App__container">
+                <Sidebar />
+                <div className="App__Content">
+                  <Header />
+                  <Content />
                 </div>
-              )
-            }
-          />
-          <Route path="/users/signin" element=<Login /> />
-          <Route
-            path="/dashboard/*"
-            element=<div className="App__container">
-              <Sidebar />
-              <div className="App__Content">
-                <Header />
-
-                <Content />
               </div>
-            </div>
-          />
+            />
+          </Route>
         </Routes>
       </Router>
     </div>

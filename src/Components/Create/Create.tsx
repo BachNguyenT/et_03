@@ -48,7 +48,7 @@ const NewArticle = () => {
 
   const token = localStorage.getItem("accessToken");
   const accessToken = `Bearer ${token}`;
-  
+
   const navigate = useNavigate();
 
   const createArticle = () => {
@@ -106,23 +106,11 @@ const NewArticle = () => {
       .catch((error) => console.log(error));
   };
 
-  const submit = () => {
-    console.log(title);
-    console.log(category);
-    console.log(isShow);
-    console.log(publicDate);
-    console.log(postImage);
-    console.log(content);
-    console.log(isEditSeo);
-    console.log(titleSeoPage);
-    console.log(descriptionSeoPage);
-  };
 
   const handleCancel = () => setPreviewOpen(false);
 
   const handleChange = (file: any) => {
     setPostImage(file.file.thumbUrl);
-    console.log(postImage);
     file.file.status = "done";
   };
 
@@ -341,7 +329,6 @@ const NewArticle = () => {
         <Button
           className="Footer__Button"
           onClick={() => {
-            submit();
             createArticle();
             navigate("/dashboard");
           }}

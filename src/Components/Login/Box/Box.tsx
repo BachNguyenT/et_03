@@ -20,7 +20,6 @@ const Box: React.FC = () => {
         password: password,
       })
       .then((response) => {
-        console.log(response.data);
         localStorage.clear();
         localStorage.accessToken = response.data.accessToken;
         navigate("/dashboard");
@@ -69,8 +68,6 @@ const Box: React.FC = () => {
             onClick={() => {
               setUsername(username_temp);
               setPassword(password_temp);
-              console.log(username);
-              console.log(password);
               
 
             }}

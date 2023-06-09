@@ -43,7 +43,6 @@ const Edit = ({ post, setPost }: any) => {
 
   const [title, setTitle] = useState(post.title);
   const [category, setCategory] = useState(post.category);
-  console.log(category);
   const [isShow, setIsShow] = useState(post.isShow);
   const [content, setContent] = useState(post.content);
   const [postImage, setPostImage] = useState(post.postImage);
@@ -57,7 +56,6 @@ const Edit = ({ post, setPost }: any) => {
   const accessToken = `Bearer ${token}`;
 
   const handleSelect = (value: string) => {
-    console.log(`selected ${value}`);
     setCategory("EVENT");
   };
 
@@ -87,27 +85,14 @@ const Edit = ({ post, setPost }: any) => {
         console.log(response.data);
       })
       .catch((error) => console.log(error));
-    console.log(typeof isShow);
-    console.log(typeof isEditSeo);
   };
 
-  const submit = () => {
-    console.log(title);
-    console.log(category);
-    console.log(isShow);
-    console.log(publicDate);
-    console.log(postImage);
-    console.log(content);
-    console.log(isEditSeo);
-    console.log(titleSeoPage);
-    console.log(descriptionSeoPage);
-  };
+  
 
   const handleCancel = () => setPreviewOpen(false);
 
   const handleChange = (file: any) => {
     setPostImage(file);
-    console.log(postImage);
     file.file.status = "done";
   };
 
@@ -156,7 +141,6 @@ const Edit = ({ post, setPost }: any) => {
                 value={title}
                 onChange={(e) => {
                   setTitle(e.target.value);
-                  console.log(title);
                 }}
               />
             </Form.Item>
@@ -171,21 +155,9 @@ const Edit = ({ post, setPost }: any) => {
                 },
               ]}
             >
-              {/* <Input
-                value={category}
-                onChange={(e) => {
-                  if (
-                    e.target.value.toUpperCase() === "BLOG" ||
-                    e.target.value.toUpperCase() === "EVENT"
-                  ) {
-                    setCategory(e.target.value.toUpperCase());
-                  }
-                  console.log(category);
-                }}
-              /> */}
               <Space wrap>
                 <Select
-                  defaultValue="BLOG"
+                  defaultValue={category}
                   style={{ width: 120 }}
                   onChange={handleSelect}
                   options={[
@@ -205,7 +177,6 @@ const Edit = ({ post, setPost }: any) => {
                 defaultChecked
                 onChange={(e) => {
                   setIsShow(e);
-                  console.log(isShow);
                 }}
                 style={{ width: "10px" }}
               />
@@ -253,9 +224,7 @@ const Edit = ({ post, setPost }: any) => {
             rows={4}
             onChange={(e) => {
               setContent(e.target.value);
-              console.log(content);
             }}
-            
           />
         </div>
         <div className="Edit__Top__SEOTitle">
@@ -265,7 +234,6 @@ const Edit = ({ post, setPost }: any) => {
             <Switch
               onChange={(e) => {
                 setIsEditSeo(e);
-                console.log(isEditSeo);
               }}
               style={{ width: "10px" }}
             />
@@ -300,7 +268,6 @@ const Edit = ({ post, setPost }: any) => {
                 value={titleSeoPage}
                 onChange={(e) => {
                   setTitleSeoPage(e.target.value);
-                  console.log(titleSeoPage);
                 }}
               />
             </Form.Item>
@@ -321,7 +288,6 @@ const Edit = ({ post, setPost }: any) => {
                 maxLength={500}
                 onChange={(e) => {
                   setDescriptionSeoPage(e.target.value);
-                  console.log(descriptionSeoPage);
                 }}
               />
             </Form.Item>
@@ -354,7 +320,6 @@ const Edit = ({ post, setPost }: any) => {
         <Button
           className="Footer__Button"
           onClick={() => {
-            submit();
             fetchArticle();
             setPost();
             navigate("/dashboard");
